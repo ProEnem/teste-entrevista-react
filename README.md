@@ -37,7 +37,7 @@ Para resolver esse exercício, utilize:
 
 -   Realizar login
 
-    -   POST https://dev.api.prodigioeducacao.com/v1/token
+    -   POST https://staging.api.prodigioeducacao.com/v1/token
 
         -   Rota aberta
 
@@ -45,7 +45,7 @@ Para resolver esse exercício, utilize:
 
             -   { "email": "email@usuario.com", "password": "senhausuario" }
 
-    -   GET https://dev.api.prodigioeducacao.com/v1/person/me)
+    -   GET https://staging.api.prodigioeducacao.com/v1/person/me)
 
         -   Rota fechada
 
