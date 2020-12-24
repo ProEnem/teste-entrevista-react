@@ -1,0 +1,3 @@
+import { Resolver } from 'react-hook-form';
+import Yup from 'yup';
+export declare const yupResolver: <TFieldValues extends Record<string, any>>(schema: Yup.ObjectSchema | Yup.Lazy, options?: Omit<Yup.ValidateOptions, 'context'>) => Resolver<TFieldValues, object>;
