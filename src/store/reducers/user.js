@@ -14,7 +14,6 @@ const userReducers = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;
   switch (type) {
     case ACTIONS.GET_USER_DATA: {
-      console.log("payload", payload);
       return {
         ...state,
         user: {

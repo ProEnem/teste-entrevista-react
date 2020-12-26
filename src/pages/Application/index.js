@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Row, Col } from "reactstrap";
 import { userActions } from "../../store/actions/user";
-import { userThunks } from "../../store/thunks/user";
 import { toast, ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.min.css";
@@ -27,7 +26,6 @@ const Application = () => {
 
   useEffect(() => {
     getUser();
-    // userThunks.getUser());
     setName(userState.name);
     setEmail(userState.email);
     setImageProfile(userState.imageProfile);
