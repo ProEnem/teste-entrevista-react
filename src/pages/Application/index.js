@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Row, Col } from "reactstrap";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
 import { userActions } from "../../store/actions/user";
 import ToastMessage from "../../components/ToastMessage";
@@ -29,9 +28,7 @@ const Application = () => {
       if (!getToken()) {
         history.push("/");
       } else {
-        // const { data } = await getUser();
         dispatch(userThunks.getUser());
-
         history.push("/application");
       }
     } catch (e) {

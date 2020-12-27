@@ -4,7 +4,7 @@ import { getUser } from "../../services";
 const userThunks = {
   getUser: () => dispatch => {
     getUser().then(response => { 
-      const { data } = response;
+      const { data } = response;      
       dispatch(userActions.setUserData(data.name, data.email, data.imageProfile, data.courses));
     });
     ;
