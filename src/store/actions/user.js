@@ -1,10 +1,10 @@
 import { ACTIONS } from "../../utils/actionConstants";
 
 const userActions = {
-  setUserData: (user) => {
+  setUserData: (name, email, imageProfile, signedCourses) => {
     return {
       type: ACTIONS.GET_USER_DATA,
-      payload: user,
+      payload: {name, email, imageProfile, signedCourses},
     };
   },
   setLoadingOn: () => ({

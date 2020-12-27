@@ -25,19 +25,11 @@ const Application = () => {
 
   const getData = async () => {
     try {
-      const token = getToken();
-      if (!token) {
+      if (!getToken()) {
         history.push("/");
       } else {
         const { data } = await getUser();
-        dispatch(
-          userActions.setUserData({
-            name: data.name,
-            email: data.email,
-            imageProfile: data.imageProfile,
-            signedCourses: data.courses,
-          })
-        );
+        dispatch(userActions.setUserData(data.name, data.email, data.imageProfile, data.courses));
 
         history.push("/application");
       }
@@ -72,6 +64,12 @@ const Application = () => {
     ))
   }
 
+  const showEmptyList = () => (
+    <tr>
+      <td colSpan="2">Sem matriculas</td>
+    </tr>
+  )
+
   return (
     <S.Container className="container">
       <ToastContainer />
@@ -97,11 +95,7 @@ const Application = () => {
             </thead>
             <tbody>
               {!!userState.signedCourses.length && getSignedCourseList(userState.signedCourses)}
-              {!userState.signedCourses.length && (
-                <tr>
-                  <td colSpan="2">Sem matriculas</td>
-                </tr>
-              )}
+              {!userState.signedCourses.length && showEmptyList()}
             </tbody>
           </S.Table>
         </Col>
