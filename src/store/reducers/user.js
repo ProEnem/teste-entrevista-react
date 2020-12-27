@@ -1,4 +1,4 @@
-import { ACTIONS } from "../../actionConstants";
+import { ACTIONS } from "../../utils/actionConstants";
 
 const INITIAL_STATE = {
   isLoading: false,
@@ -35,6 +35,17 @@ const userReducers = (state = INITIAL_STATE, action) => {
         ...state,
         isLoading: false,
       };
+    }
+    case ACTIONS.RESET_USER_DATA: {
+      return {
+        ...state,
+        user: {
+          name: "",
+          email: "",
+          imageProfile: "",
+          signedCourses: "",
+        },
+      }
     }
     default:
       return state;

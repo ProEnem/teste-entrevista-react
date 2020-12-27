@@ -1,5 +1,5 @@
 import { userActions } from "../actions/user";
-import API from "../../api";
+import API from "../../config/api";
 
 const token = localStorage.getItem("token");
 

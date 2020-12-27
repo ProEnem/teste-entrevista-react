@@ -15,8 +15,10 @@ import {
   FormGroup,
   Input,
 } from "reactstrap";
-import API from "../../api";
+
 import ToastMessage from "../../components/ToastMessage";
+import { logon } from '../../services';
+import { setToken } from '../../utils/storage';
 import * as S from "./styles";
 
 import { userActions } from "../../store/actions/user";
@@ -42,16 +44,15 @@ const Login = () => {
   const onSubmit = async ({ email, password }) => {
     try {
       dispatch(userActions.setLoadingOn());
-
-      const responseToken = await API.post("/token", { email, password });
-
-      localStorage.setItem("token", responseToken.data.token);
+      const responseToken = await logon(email, password);
+      setToken(responseToken.data.token);
       history.push("/application");
 
     } catch (e) {
       toast.error(
         <ToastMessage title="Erro" message={e.response.data.detail} />
       );      
+
     } finally {
       dispatch(userActions.setLoadingOff());
     }

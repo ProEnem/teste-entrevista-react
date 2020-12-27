@@ -1,4 +1,4 @@
-import { ACTIONS } from "../../actionConstants";
+import { ACTIONS } from "../../utils/actionConstants";
 
 const userActions = {
   setUserData: (user) => {
@@ -13,6 +13,9 @@ const userActions = {
   setLoadingOff: () => ({
     type: ACTIONS.SET_LOADING_OFF,
   }),
+  resetUserData: () => ({
+    type: ACTIONS.RESET_USER_DATA
+  })
 };
 
 export { userActions };

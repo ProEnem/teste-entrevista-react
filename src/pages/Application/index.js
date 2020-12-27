@@ -9,7 +9,8 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { userActions } from "../../store/actions/user";
 import ToastMessage from "../../components/ToastMessage";
 import ProfileInfo from "../../components/ProfileInfo";
-import API from "../../api";
+import { getUser } from '../../services';
+import { getToken } from '../../utils/storage';
 
 import * as S from "./styles";
 
@@ -18,30 +19,17 @@ const Application = () => {
   const userState = useSelector(({ userReducers }) => userReducers.user);
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [imageProfile, setImageProfile] = useState("");
-  const [signedCourses, setSignedCourses] = useState([]);
-
   useEffect(() => {
-    getUser();    
-    setName(userState.name);
-    setEmail(userState.email);
-    setImageProfile(userState.imageProfile);
-    setSignedCourses(userState.signedCourses);
+    getData();    
   }, []);
 
-  const getUser = async () => {
+  const getData = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = getToken();
       if (!token) {
         history.push("/");
       } else {
-        const { data } = await API.get("/person/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await getUser();
         dispatch(
           userActions.setUserData({
             name: data.name,
@@ -62,6 +50,7 @@ const Application = () => {
   };
 
   const logoff = () => {
+    dispatch(userActions.resetUserData())
     localStorage.removeItem("token");
     history.push("/");
   };
@@ -90,14 +79,14 @@ const Application = () => {
         <Col md="12" className="text-center">
           <S.ProfileImage
             className="img-thumbnail mx-auto d-block"
-            src={imageProfile}
+            src={userState.imageProfile}
             alt="Foto do perfil do usuário"
           />
         </Col>
       </Row>
       <Row>
-        <ProfileInfo label="Nome" data={name}  />
-        <ProfileInfo label="E-mail" data={email}  />        
+        <ProfileInfo label="Nome" data={userState.name}  />
+        <ProfileInfo label="E-mail" data={userState.email}  />        
         <Col md="12">
           <S.Table>
             <thead>
@@ -107,8 +96,8 @@ const Application = () => {
               </tr>
             </thead>
             <tbody>
-              {!!signedCourses.length && getSignedCourseList(signedCourses)}
-              {!signedCourses.length && (
+              {!!userState.signedCourses.length && getSignedCourseList(userState.signedCourses)}
+              {!userState.signedCourses.length && (
                 <tr>
                   <td colSpan="2">Sem matriculas</td>
                 </tr>
