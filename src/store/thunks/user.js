@@ -1,16 +1,13 @@
 import { userActions } from "../actions/user";
-import API from "../../config/api";
-import { getToken } from '../../utils/storage';
+import { getUser } from "../../services";
 
 const userThunks = {
-  getUser: () => {
-    API.get("/person/me", {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }).then((user) => {
-      userActions.setUserData(user.data);
+  getUser: () => dispatch => {
+    getUser().then(response => { 
+      const { data } = response;
+      dispatch(userActions.setUserData(data.name, data.email, data.imageProfile, data.courses));
     });
+    ;
   },
 };
 

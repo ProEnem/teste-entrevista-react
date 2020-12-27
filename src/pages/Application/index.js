@@ -10,8 +10,8 @@ import { userActions } from "../../store/actions/user";
 import ToastMessage from "../../components/ToastMessage";
 import ProfileInfo from "../../components/ProfileInfo";
 import noImage from "../../assets/images/no-image.jpg";
-import { getUser } from '../../services';
 import { getToken } from '../../utils/storage';
+import { userThunks } from "../../store/thunks/user";
 
 import * as S from "./styles";
 
@@ -29,8 +29,8 @@ const Application = () => {
       if (!getToken()) {
         history.push("/");
       } else {
-        const { data } = await getUser();
-        dispatch(userActions.setUserData(data.name, data.email, data.imageProfile, data.courses));
+        // const { data } = await getUser();
+        dispatch(userThunks.getUser());
 
         history.push("/application");
       }
