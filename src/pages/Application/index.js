@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { userActions } from "../../store/actions/user";
 import ToastMessage from "../../components/ToastMessage";
 import ProfileInfo from "../../components/ProfileInfo";
+import noImage from "../../assets/images/no-image.jpg";
 import { getUser } from '../../services';
 import { getToken } from '../../utils/storage';
 
@@ -77,7 +78,7 @@ const Application = () => {
         <Col md="12" className="text-center">
           <S.ProfileImage
             className="img-thumbnail mx-auto d-block"
-            src={userState.imageProfile}
+            src={userState.imageProfile || noImage}
             alt="Foto do perfil do usuário"
           />
         </Col>
