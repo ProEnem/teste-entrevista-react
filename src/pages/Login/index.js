@@ -25,9 +25,9 @@ import { useDispatch, useSelector } from "react-redux";
 const schema = yup.object().shape({
   email: yup
     .string()
-    .email("Email pattern is incorrect")
-    .required("Email is required"),
-  password: yup.string().required("Password is required"),
+    .email("E-mail fora do padrão")
+    .required("Campo obrigatório"),
+  password: yup.string().required("Campo obrigatório"),
 });
 
 const Login = () => {
@@ -47,7 +47,7 @@ const Login = () => {
 
       localStorage.setItem("token", responseToken.data.token);
       history.push("/application");
-      
+
     } catch (e) {
       toast.error(
         <ToastMessage title="Erro" message={e.response.data.detail} />
