@@ -1,13 +1,12 @@
 import { userActions } from "../actions/user";
 import API from "../../config/api";
-
-const token = localStorage.getItem("token");
+import { getToken } from '../../utils/storage';
 
 const userThunks = {
   getUser: () => {
     API.get("/person/me", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((user) => {
       userActions.setUserData(user.data);
