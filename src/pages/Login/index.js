@@ -42,16 +42,17 @@ const Login = () => {
   const onSubmit = async ({ email, password }) => {
     try {
       dispatch(userActions.setLoadingOn());
+
       const responseToken = await API.post("/token", { email, password });
 
       localStorage.setItem("token", responseToken.data.token);
-
-      dispatch(userActions.setLoadingOff());
       history.push("/application");
+      
     } catch (e) {
       toast.error(
         <ToastMessage title="Erro" message={e.response.data.detail} />
-      );
+      );      
+    } finally {
       dispatch(userActions.setLoadingOff());
     }
   };

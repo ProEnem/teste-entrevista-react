@@ -10,7 +10,7 @@ const userThunks = {
         Authorization: `Bearer ${token}`,
       },
     }).then((user) => {
-      userActions.getUserData(user.data);
+      userActions.setUserData(user.data);
     });
   },
 };

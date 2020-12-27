@@ -1,7 +1,7 @@
 import { ACTIONS } from "../../actionConstants";
 
 const userActions = {
-  getUserData: (user) => {
+  setUserData: (user) => {
     return {
       type: ACTIONS.GET_USER_DATA,
       payload: user,

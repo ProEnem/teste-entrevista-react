@@ -3,13 +3,12 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Row, Col } from "reactstrap";
-import { userActions } from "../../store/actions/user";
 import { toast, ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.min.css";
 
+import { userActions } from "../../store/actions/user";
 import ToastMessage from "../../components/ToastMessage";
-
+import ProfileInfo from "../../components/ProfileInfo";
 import API from "../../api";
 
 import * as S from "./styles";
@@ -25,7 +24,7 @@ const Application = () => {
   const [signedCourses, setSignedCourses] = useState([]);
 
   useEffect(() => {
-    getUser();
+    getUser();    
     setName(userState.name);
     setEmail(userState.email);
     setImageProfile(userState.imageProfile);
@@ -38,17 +37,17 @@ const Application = () => {
       if (!token) {
         history.push("/");
       } else {
-        const responseUser = await API.get("/person/me", {
+        const { data } = await API.get("/person/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         dispatch(
-          userActions.getUserData({
-            name: responseUser.data.name,
-            email: responseUser.data.email,
-            imageProfile: responseUser.data.imageProfile,
-            signedCourses: responseUser.data.courses,
+          userActions.setUserData({
+            name: data.name,
+            email: data.email,
+            imageProfile: data.imageProfile,
+            signedCourses: data.courses,
           })
         );
 
@@ -67,6 +66,23 @@ const Application = () => {
     history.push("/");
   };
 
+  const getSignedCourseList = (list) => {
+    return list.map((item) => (
+      <tr key={item.id}>
+        <td>{item.name}</td>
+        <td>
+          <Moment format="DD/MM/YYYY">
+            {item.schoolPeriod.startDate}
+          </Moment>
+          {" - "}
+          <Moment format="DD/MM/YYYY">
+            {item.schoolPeriod.endDate}
+          </Moment>
+        </td>
+      </tr>
+    ))
+  }
+
   return (
     <S.Container className="container">
       <ToastContainer />
@@ -80,14 +96,8 @@ const Application = () => {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
-          <S.Label>Name</S.Label>
-          <S.UserData>{name}</S.UserData>
-        </Col>
-        <Col md="6">
-          <S.Label>Email</S.Label>
-          <S.UserData>{email}</S.UserData>
-        </Col>
+        <ProfileInfo label="Nome" data={name}  />
+        <ProfileInfo label="E-mail" data={email}  />        
         <Col md="12">
           <S.Table>
             <thead>
@@ -97,21 +107,7 @@ const Application = () => {
               </tr>
             </thead>
             <tbody>
-              {!!signedCourses.length &&
-                signedCourses.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>
-                      <Moment format="DD/MM/YYYY">
-                        {item.schoolPeriod.startDate}
-                      </Moment>
-                      {" - "}
-                      <Moment format="DD/MM/YYYY">
-                        {item.schoolPeriod.endDate}
-                      </Moment>
-                    </td>
-                  </tr>
-                ))}
+              {!!signedCourses.length && getSignedCourseList(signedCourses)}
               {!signedCourses.length && (
                 <tr>
                   <td colSpan="2">Sem matriculas</td>
@@ -124,7 +120,7 @@ const Application = () => {
       <Row>
         <Col md="12" className="text-center">
           <S.Button color="danger" onClick={logoff}>
-            Logout
+            Sair
           </S.Button>
         </Col>
       </Row>
