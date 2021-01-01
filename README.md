@@ -45,6 +45,12 @@ Para resolver esse exercício, utilize:
 
             -   { "email": "email@usuario.com", "password": "senhausuario" }
 
+        -   Cabeçalho adicional:
+
+            -   Authorization: Bearer \<token-recebido-no-post-de-login\>
+
+            -   X-Brand: proenem
+
     -   GET https://staging.api.prodigioeducacao.com/v1/person/me)
 
         -   Rota fechada
