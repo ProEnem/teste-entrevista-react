@@ -1,0 +1,72 @@
+{
+  "name": "proenem-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@unform/core": "^2.1.3",
+    "@unform/web": "^2.1.3",
+    "axios": "^0.21.1",
+    "polished": "^4.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^4.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "react-spring": "^8.0.27",
+    "react-toastify": "^6.2.0",
+    "styled-components": "^5.2.1",
+    "uuidv4": "^6.2.6",
+    "yup": "^0.32.8",
+    "web-vitals": "^0.2.4"
+
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^s3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "typescript": "~3.8.0"
+  }
+}
